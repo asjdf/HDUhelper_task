@@ -44,6 +44,25 @@ def handle_roommate():
     return json.dumps(list(dbm.roommate(uid, name, building, room)))
 
 
+@app.route('/housework', methods=['POST'])
+def handle_housework():
+    building = request.form.get('building', type=int, default=-1)
+    room = request.form.get('room', type=int, default=-1)
+    return json.dumps(list(dbm.housework(building, room)))
+
+
+@app.route('/set-housework', methods=['POST'])
+def handle_set_housework():
+    building = request.form.get('building', type=int, default=-1)
+    room = request.form.get('room', type=int, default=-1)
+    first = request.form.get('1', type=int, default=-1)
+    second = request.form.get('2', type=int, default=-1)
+    third = request.form.get('3', type=int, default=-1)
+    forth = request.form.get('4', type=int, default=-1)
+    fifth = request.form.get('5', type=int, default=-1)
+    return str(dbm.set_housework(building, room, first, second, third, forth, fifth))
+
+
 # 数据库设置
 DBIp = "localhost"
 DBUserName = "root"
@@ -125,13 +144,12 @@ class DBManager(object):
                 sleep(2)
                 return self.roommate(uid, name, building, room)
 
-
     def housework(self, building = -1, room = -1):
         if building != -1 and room != -1:
             sql = "SELECT * FROM `task1_work` WHERE `building` = %d && `room` = %d" % (building, room)
-            cursor = self.db.cursor(DictCursor)
             try:
                 self.db.ping(reconnect=True)
+                cursor = self.db.cursor(DictCursor)
                 cursor.execute(sql)
                 res = cursor.fetchall()
                 print(res)
@@ -142,30 +160,23 @@ class DBManager(object):
                 sleep(2)
                 return self.housework(building, room)
 
-    def set_housework(self, building = -1, room = -1, first = -1, second = -1, third = -1, forth = -1, fifth = -1):
+    def set_housework(self, building=-1, room=-1, first=-1, second=-1, third=-1, forth=-1, fifth=-1):
         if building != -1 and room != -1:
             sql = "REPLACE INTO `task1_work` (`building`, `room`, `1`, `2`, `3`, `4`, `5`) \
-                  VALUES (%d,'%d',%d,%d,%d)"\
+                  VALUES (%d,%d,%d,%d,%d,%d,%d)"\
                   % (building, room, first, second, third, forth, fifth)
-            cursor = self.db.cursor(DictCursor)
+            print(sql)
             try:
                 self.db.ping(reconnect=True)
+                cursor = self.db.cursor()
                 cursor.execute(sql)
-                res = cursor.fetchall()
-                print(res)
-                return res
+                return 0
             except:
-                self.db.rollback()
-                print("设置值日信息错误，2秒后重试")
+                print("插入学生信息错误，2秒后重试 信息输入：%d,'%d',%d,%d,%d" % (building, room, first, second, third, forth, fifth))
                 sleep(2)
-                return self.housework(building, room)
+                return self.set_housework(building, room, first, second, third, forth, fifth)
 
 
 if __name__ == '__main__':
     dbm = DBManager(DBIp, DBUserName, DBPassword, DBTableName)
-    print(dbm.search_stu(uid=20322230))
-    print(dbm.search_stu(name='杨成锴'))
-    print(type(dbm.roommate(name='杨成锴')))
-    app.run(debug=True)
-    # for i in range(5):
-    #     dbm.insertstu(i, str(i), 1, i)
+    app.run(debug=False, host='0.0.0.0')
