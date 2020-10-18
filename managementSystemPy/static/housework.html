@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息管理系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+</head>
+<body>
+<ul class="layui-nav" lay-filter="">
+    <li class="layui-nav-item"><p>学生信息管理系统</p></li>
+    <li class="layui-nav-item"><a href="./index.html">学生数据管理</a></li>
+    <li class="layui-nav-item layui-this"><a href="./housework.html">值日安排</a></li>
+    <li class="layui-nav-item"><a href="./roommate.html">室友查找</a></li>
+</ul>
+<div class="layui-container" style="margin-top: 15px">
+    <div class="layui-col-xs12 layui-col-md6">
+        <fieldset class="layui-elem-field">
+            <legend>请输入信息</legend>
+            <div class="layui-field-box">
+                <blockquote class="layui-elem-quote">可单独输入学号或姓名，或同时输入楼号和寝室房间号进行查询</blockquote>
+                <form id="form1" class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">学号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="uid" lay-verify="" placeholder="请输入学号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">姓名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" lay-verify="" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">楼号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="building" lay-verify="" placeholder="请输入寝室楼号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">寝室房间号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="room" lay-verify="" placeholder="请输入寝室房间号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input -block">
+                            <button class="layui-btn" lay-submit lay-filter="form1">提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+    </div>
+    <div class="layui-col-xs12 layui-col-md6">
+        <table class="layui-hide" id="test"></table>
+    </div>
+</div>
+<script src="./layui/layui.all.js"></script>
+<script>
+    var $ = layui.$;
+    layui.use(['form','table'], function(){
+        var form = layui.form;
+        var table = layui.table;
+
+        //监听提交
+        form.on('submit(form1)', function(data){
+            layer.msg("正在查询");
+            $.post("/roommate",$('#form1').serialize(),function(result){
+                table.render({
+                    elem: '#test'
+                    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                    ,cols: [[
+                        {field:'uid', width:160, title: '学号', sort: true}
+                        ,{field:'name', width:80, title: '姓名'}
+                        ,{field:'building', width:80, title: '楼号'}
+                        ,{field:'room', width:80, title: '寝室号'}
+                        ,{field:'bed', width:80, title: '床号', sort: true}
+                    ]]
+                    ,data: $.parseJSON(result)
+                    ,even: true
+                });
+            });
+            return false;
+        });
+
+        // table.render({
+        //     elem: '#test'
+        //     ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+        //     ,cols: [[
+        //         {field:'id', width:80, title: 'ID', sort: true}
+        //         ,{field:'username', width:80, title: '用户名'}
+        //         ,{field:'sex', width:80, title: '性别', sort: true}
+        //     ]]
+        // });
+    });
+</script>
+</body>
+</html>
