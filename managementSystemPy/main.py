@@ -94,7 +94,7 @@ class DBManager(object):
 
     def insert_stu(self, uid, name, building, room, bed):
         self.db.ping(reconnect=True)
-        cursor = self.db.cursor()
+        0.0cursor = self.db.cursor()
         sql = "REPLACE INTO `task1`(`uid`, `name`, `building`, `room`, `bed`) \
                 VALUES (%d,'%s',%d,%d,%d)" \
               % (uid, name, building, room, bed)
