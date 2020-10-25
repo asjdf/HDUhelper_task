@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息管理系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+</head>
+<body>
+    <ul class="layui-nav" lay-filter="">
+        <li class="layui-nav-item"><p>学生信息管理系统</p></li>
+        <li class="layui-nav-item layui-this"><a href="./index.html">学生数据管理</a></li>
+        <li class="layui-nav-item"><a href="./housework.html">值日安排</a></li>
+        <li class="layui-nav-item"><a href="./roommate.html">室友查找</a></li>
+    </ul>
+    <div class="layui-container" style="margin-top: 15px">
+        <div class="layui-col-xs12 layui-col-sm6 layui-col-md6 layui-col-md-offset3">
+            <fieldset class="layui-elem-field">
+                <legend>添加学生信息</legend>
+                <div class="layui-field-box">
+                    <form id="form1" class="layui-form" action="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">学号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="uid" required  lay-verify="required|number" placeholder="请输入学号" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">姓名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="name" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">楼号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="building" required  lay-verify="required|number" placeholder="请输入寝室楼号" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">寝室房间号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="room" required  lay-verify="required|number" placeholder="请输入寝室房间号" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">床号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="bed" required  lay-verify="required|number" placeholder="请输入床号" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="form1">提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+        <div class="layui-col-xs12 layui-col-sm6 layui-col-md6 layui-col-md-offset3">
+            <fieldset class="layui-elem-field">
+                <legend>删除学生信息</legend>
+                <div class="layui-field-box">
+                    <form id="form2" class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">学号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="uid" required  lay-verify="required|number" placeholder="请输入学号" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="form2">提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <script src="./layui/layui.all.js"></script>
+    <script>
+        var $ = layui.$;
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(form1)', function(data){
+                layer.msg("正在录入");
+                $.post("/add",$('#form1').serialize(),function(result){
+                    if(result == 0){
+                        layer.msg("录入成功")
+                    }
+                });
+                return false;
+            });
+            form.on('submit(form2)', function(data){
+                layer.msg("正在删除");
+                $.post("/del",$('#form2').serialize(),function(result){
+                    if(result == 0){
+                        layer.msg("删除成功")
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

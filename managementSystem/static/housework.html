@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息管理系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+</head>
+<body>
+<ul class="layui-nav" lay-filter="">
+    <li class="layui-nav-item"><p>学生信息管理系统</p></li>
+    <li class="layui-nav-item"><a href="./index.html">学生数据管理</a></li>
+    <li class="layui-nav-item layui-this"><a href="./housework.html">值日安排</a></li>
+    <li class="layui-nav-item"><a href="./roommate.html">室友查找</a></li>
+</ul>
+<div class="layui-container" style="margin-top: 15px">
+    <div class="layui-col-xs12 layui-col-md6">
+        <fieldset class="layui-elem-field">
+            <legend>查询值日信息</legend>
+            <div class="layui-field-box">
+                <blockquote class="layui-elem-quote">输入楼号和寝室房间号进行查询</blockquote>
+                <form id="form1" class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">楼号</label>
+                        <div class="layui-input-block">
+                            <input id="searchB" type="text" name="building" lay-verify="required|number" placeholder="请输入寝室楼号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">寝室房间号</label>
+                        <div class="layui-input-block">
+                            <input id="searchR" type="text" name="room" lay-verify="required|number" placeholder="请输入寝室房间号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="form1">确定</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field" id="search2">
+            <legend>查询值日</legend>
+            <div class="layui-field-box">
+                <blockquote class="layui-elem-quote">当前<p id="building" style="display: inline;">NULL</p>楼 <p id="room" style="display: inline;">NULL</p>室</blockquote>
+                <blockquote class="layui-elem-quote">当日值日人员：<p id="worker" style="display: inline;">NULL</p></blockquote>
+                <div class="layui-inline">
+                    日期：<input type="text" class="layui-input" id="date">
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="layui-col-xs12 layui-col-md6">
+        <fieldset class="layui-elem-field">
+            <legend>设置值日信息</legend>
+            <div class="layui-field-box">
+                <blockquote class="layui-elem-quote">值日顺序从9月1日开始计算</blockquote>
+                <form id="form2" class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">楼号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="building" lay-verify="required|number" placeholder="请输入寝室楼号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">寝室房间号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="room" lay-verify="required|number" placeholder="请输入寝室房间号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">第一个值日</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="1" lay-verify="required|number" placeholder="第一个值日的（学号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">第二个值日</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="2" lay-verify="required|number" placeholder="第二个值日的（学号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">第三个值日</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="3" lay-verify="required|number" placeholder="第三个值日的（学号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">第四个值日</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="4" lay-verify="required|number" placeholder="第四个值日的（学号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">第五个值日</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="5" lay-verify="required|number" placeholder="第五个值日的（学号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="form2">提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<script src="./layui/layui.all.js"></script>
+<script>
+    function DateDiff(sDate, eDate) { //sDate和eDate是yyyy-MM-dd格式
+        var date1 = new Date(sDate);
+        var date2 = new Date(eDate);
+        var date3=date2.getTime()-date1.getTime();
+        var days=Math.floor(date3/(24*3600*1000));
+        return days;
+    }
+    var $ = layui.$;
+    layui.use(['form','table','laydate'], function(){
+        var form = layui.form;
+        var table = layui.table;
+        var laydate = layui.laydate;
+
+        $("#search2").hide();
+        //监听提交
+        form.on('submit(form1)', function(data){
+            layer.msg("正在查询");
+            $.post("/housework",$('#form1').serialize(),function(result){
+                layer.alert(result);
+                $("#building").text($('#searchB').val())
+                $("#room").text($('#searchR').val())
+                $("#search2").show();
+                laydate.render({
+                    elem: '#date' //指定元素
+                    ,done: function(value, date, endDate){
+                        let worker = 0;
+                        let diff = DateDiff("2020-09-01", value);
+                        var resultJson = $.parseJSON(result)
+                        switch (diff % 5) {//不要吐槽 好不容易写完懒得改了 我知道不优雅
+                            case 0:
+                                worker = resultJson[0]["1"];
+                                break;
+                            case 1:
+                                worker = resultJson[0]["2"];
+                                break;
+                            case 2:
+                                worker = resultJson[0]["3"];
+                                break;
+                            case 3:
+                                worker = resultJson[0]["4"];
+                                break;
+                            case 4:
+                                worker = resultJson[0]["5"];
+                                break;
+                        }
+                        $("#worker").text(worker)
+                    }
+                });
+            });
+            return false;
+        });
+
+        form.on('submit(form2)', function(data){
+            layer.msg("正在录入");
+            $.post("/set-housework",$('#form2').serialize(),function(result){
+                if(result == 0){
+                    layer.msg("录入成功")
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

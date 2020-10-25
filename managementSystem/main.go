@@ -8,11 +8,15 @@ import (
 	"gorm.io/gorm"
 )
 
+func HandleSearch()  {
+	
+}
+
 type StuManager struct {
 	db *gorm.DB
 }
 
-func NewStuManager(db *gorm.DB)  *StuManager{
+func NewStuManager(db *gorm.DB) *StuManager {
 	return &StuManager{db}
 }
 
@@ -21,10 +25,10 @@ func (s StuManager) SearchStu(uid int, name string) Task1Go {
 	if uid != 0 {
 		fmt.Println(uid)
 		s.db.Where("uid = ?", uid).Find(&data)
-	}else if name != ""{
+	} else if name != "" {
 		fmt.Println(name)
 		s.db.Where("uid = ?", uid).Find(&data)
-	}else{
+	} else {
 		fmt.Println("error: 无传入参数")
 	}
 	return data
@@ -37,7 +41,7 @@ func (s StuManager) DelStu(uid int) int {
 }
 
 func (s StuManager) InsertStu(uid int, name string, building int, room int, bed int) int {
-	if uid != 0 && name != "" && building != 0 && room != 0 && bed != 0{
+	if uid != 0 && name != "" && building != 0 && room != 0 && bed != 0 {
 		data := Task1Go{
 			Uid:      uid,
 			Name:     name,
@@ -45,9 +49,9 @@ func (s StuManager) InsertStu(uid int, name string, building int, room int, bed 
 			Room:     room,
 			Bed:      bed,
 		}
-		s.db.Where("uid = ?",data.Uid).Save(&data)
+		s.db.Where("uid = ?", data.Uid).Save(&data)
 		return 0
-	}else{
+	} else {
 		return 1
 	}
 }
@@ -56,16 +60,16 @@ func (s StuManager) Roommate(uid int, name string, building int, room int) Task1
 	data := Task1Go{}
 	if uid != 0 {
 		s.db.Where("uid = ?", uid).Find(&data)
-	}else if name != "" {
+	} else if name != "" {
 		s.db.Where("name = ?", name).Find(&data)
-	}else if building != 0 && room != 0{
+	} else if building != 0 && room != 0 {
 		s.db.Where("building = ? AND room = ？", building, room).Find(&data)
 	}
 	return data
 }
 
-func (s StuManager) SetHousework(building int, room int, first int, second int,third int, forth int,fifth int) int {
-	if building != 0 && room != 0 && first != 0 && second != 0 && third != 0 && forth != 0 && fifth != 0{
+func (s StuManager) SetHousework(building int, room int, first int, second int, third int, forth int, fifth int) int {
+	if building != 0 && room != 0 && first != 0 && second != 0 && third != 0 && forth != 0 && fifth != 0 {
 		data := Task1GoWork{
 			Building: building,
 			Room:     room,
@@ -77,42 +81,43 @@ func (s StuManager) SetHousework(building int, room int, first int, second int,t
 		}
 		s.db.Where("building = ? AND room = ?", building, room).Save(&data)
 		return 0
-	}else{
+	} else {
 		return 1
 	}
 }
 
 func (s StuManager) Housework(building int, room int) Task1GoWork {
-	data :=Task1GoWork{}
+	data := Task1GoWork{}
 	if building != 0 && room != 0 {
 		s.db.Where("building = ? AND room = ?", building, room).Find(&data)
 	}
 	return data
 }
 
+
 type Task1Go struct {
 	gorm.Model
-	Uid int `gorm:"uniqueIndex"`
-	Name string
+	Uid      int `gorm:"uniqueIndex"`
+	Name     string
 	Building int
-	Room int
-	Bed int``
+	Room     int
+	Bed      int ``
 }
 type Task1GoWork struct {
 	gorm.Model
 	Building int
-	Room int
-	First int
-	Second int
-	Third int
-	Forth int
-	Fifth int
+	Room     int
+	First    int
+	Second   int
+	Third    int
+	Forth    int
+	Fifth    int
 }
 
 func main() {
 	dsn := "root:root@tcp(127.0.0.1:3306)/hduhelper?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil{
+	if err != nil {
 		fmt.Println("数据库初始化出错")
 	}
 	//fmt.Println(db.Take(&test_go))
@@ -120,15 +125,15 @@ func main() {
 	db.AutoMigrate(&Task1GoWork{})
 	fmt.Println(err)
 	data := &Task1Go{
-		Uid: 20322231,
-		Name:  "test2",
+		Uid:      20322231,
+		Name:     "test2",
 		Building: 27,
-		Room: 624,
-		Bed: 4,
+		Room:     624,
+		Bed:      4,
 	}
 	//db.Create(&data)
-	db.Where("uid = ?",data.Uid).Save(&data)
-	dataM,_ := json.Marshal(data)
+	db.Where("uid = ?", data.Uid).Save(&data)
+	dataM, _ := json.Marshal(data)
 	fmt.Println(string(dataM))
 	//fmt.Println(db.Take(&Task1Go{}))
 	//for true {
@@ -144,11 +149,18 @@ func main() {
 	//fmt.Println(data)
 	//fmt.Println("hello")
 	r := gin.Default()
+	//r.GET("/", func(c *gin.Context) {
+	//	c.Redirect(http.StatusMovedPermanently, "/test/index.html")
+	//})
+	//test := r.Group("/test")
+	//{
+	//	test.GET("/ping", func(c *gin.Context) {
+	//		c.JSON(200, gin.H{
+	//			"message": "pong",
+	//		})
+	//	})
+	//	test.Static("", "./static")
+	//}
 
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run(":8085")
+	r.Run(":8086")
 }

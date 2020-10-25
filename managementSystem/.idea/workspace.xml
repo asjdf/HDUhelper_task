@@ -61,6 +61,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="go.sdk" />
   </component>
   <component name="RunManager">
@@ -139,34 +140,45 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="549" y="172" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1603269082513" />
-    <state width="1877" height="213" key="GridCell.Tab.0.bottom" timestamp="1603339720965">
-      <screen x="-1920" y="-485" width="1920" height="1050" />
+    <state width="1493" height="124" key="GridCell.Tab.0.bottom" timestamp="1603555499533">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1877" height="213" key="GridCell.Tab.0.bottom/0.0.1536.834/-1920.-485.1920.1050@-1920.-485.1920.1050" timestamp="1603339720965" />
     <state width="1493" height="214" key="GridCell.Tab.0.bottom/0.0.1536.834/-1920.-485.1920.1050@0.0.1536.834" timestamp="1602821554974" />
-    <state width="746" height="213" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1603280596182" />
-    <state width="1877" height="213" key="GridCell.Tab.0.center" timestamp="1603339720965">
-      <screen x="-1920" y="-485" width="1920" height="1050" />
+    <state width="1493" height="124" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1603555499533" />
+    <state width="1493" height="124" key="GridCell.Tab.0.center" timestamp="1603555499532">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1877" height="213" key="GridCell.Tab.0.center/0.0.1536.834/-1920.-485.1920.1050@-1920.-485.1920.1050" timestamp="1603339720965" />
     <state width="1493" height="214" key="GridCell.Tab.0.center/0.0.1536.834/-1920.-485.1920.1050@0.0.1536.834" timestamp="1602821554974" />
-    <state width="746" height="213" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1603280596182" />
-    <state width="1877" height="213" key="GridCell.Tab.0.left" timestamp="1603339720965">
-      <screen x="-1920" y="-485" width="1920" height="1050" />
+    <state width="1493" height="124" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1603555499532" />
+    <state width="1493" height="124" key="GridCell.Tab.0.left" timestamp="1603555499531">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1877" height="213" key="GridCell.Tab.0.left/0.0.1536.834/-1920.-485.1920.1050@-1920.-485.1920.1050" timestamp="1603339720965" />
     <state width="1493" height="214" key="GridCell.Tab.0.left/0.0.1536.834/-1920.-485.1920.1050@0.0.1536.834" timestamp="1602821554974" />
-    <state width="746" height="213" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1603280596182" />
-    <state width="1877" height="213" key="GridCell.Tab.0.right" timestamp="1603339720965">
-      <screen x="-1920" y="-485" width="1920" height="1050" />
+    <state width="1493" height="124" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1603555499531" />
+    <state width="1493" height="124" key="GridCell.Tab.0.right" timestamp="1603555499532">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1877" height="213" key="GridCell.Tab.0.right/0.0.1536.834/-1920.-485.1920.1050@-1920.-485.1920.1050" timestamp="1603339720965" />
     <state width="1493" height="214" key="GridCell.Tab.0.right/0.0.1536.834/-1920.-485.1920.1050@0.0.1536.834" timestamp="1602821554974" />
-    <state width="746" height="213" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1603280596182" />
+    <state width="1493" height="124" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1603555499532" />
     <state x="-1582" y="-407" key="SettingsEditor" timestamp="1603339762728">
       <screen x="-1920" y="-485" width="1920" height="1050" />
     </state>
     <state x="-1582" y="-407" key="SettingsEditor/0.0.1536.834/-1920.-485.1920.1050@-1920.-485.1920.1050" timestamp="1603339762728" />
     <state x="270" y="62" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1603269404548" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/main.go</url>
+          <line>59</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
